@@ -12,8 +12,9 @@ Route::put('/produks/{produk}', [ProdukController::class, 'update']);
 Route::delete('/produks/{produk}', [ProdukController::class, 'destroy']);
 
 // KERANJANG
-Route::post('/keranjang/tambah/{produkId}', [KeranjangController::class, 'addToCart']);
-Route::post('/keranjang/hapus/{produkId}', [KeranjangController::class, 'removeFromCart']);
+Route::get('/keranjang/{userId}', [KeranjangController::class, 'index']);
+Route::post('/keranjang/add/{produkId}', [KeranjangController::class, 'addToCart']);
+Route::post('/keranjang/delete/{produkId}', [KeranjangController::class, 'removeFromCart']);
 Route::post('/keranjang/kurang/{produkId}', [KeranjangController::class, 'reduceFromCart']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

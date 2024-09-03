@@ -56,11 +56,14 @@ class ProdukController extends Controller
      * @param  mixed $produks
      * @return void
      */
-    public function show(Produk $produk)
+    public function show($id)
     {
-        // print_r($produks->toArray()); exit;
-        //return single produks$produks as a resource
-        return new ProdukResource(true, 'Data Produk Ditemukan!', $produk);
+        $produk = Produk::findOrFail($id);
+
+        return new ProdukResource($produk, [
+            'status' => true,
+            'message' => 'Data Produk Ditemukan!'
+        ]);
     }
 
     /**

@@ -11,21 +11,6 @@ class ProdukResource extends JsonResource
     public $message;
 
     /**
-     * __construct
-     *
-     * @param  mixed $status
-     * @param  mixed $message
-     * @param  mixed $resource
-     * @return void
-     */
-    // public function __construct($status, $message, $resource)
-    // {
-    //     parent::__construct($resource);
-    //     $this->status  = $status;
-    //     $this->message = $message;
-    // }
-
-    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -40,8 +25,8 @@ class ProdukResource extends JsonResource
                 'nama' => $this->nama,
                 'quantity' => $this->quantity,
                 'kategori' => $this->kategori,
-                'create_at' => $this->create_at,
-                'update_at' => $this->update_at,
+                'created_at' => $this->created_at,
+                'updated_at' => $this->updated_at,
         ];
     }
 }

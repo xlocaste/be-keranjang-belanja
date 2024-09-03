@@ -17,6 +17,32 @@ use Illuminate\Support\Facades\Log;
 
 class KeranjangController extends Controller
 {
+    public function index(Request $request, string $userId)
+    {
+        // Cek apakah user ada berdasarkan userId dari URL
+        $user = User::findOrFail($userId);
+
+        // Ambil semua item di keranjang untuk user ini
+        $keranjangItems = Keranjang::where('user_id', $userId)->get();
+
+        // Loop melalui item keranjang untuk menyertakan nama produk
+        $result = $keranjangItems->map(function ($item) {
+            $produk = Produk::find($item->produk_id);
+            return [
+                'produk_id' => $item->produk_id,
+                'nama_produk' => $produk->nama,
+                'quantity' => $item->quantity,
+                'kategori' => $produk->kategori,
+            ];
+        });
+
+        // Kembalikan respons dengan data keranjang
+        return response()->json([
+            'success' => true,
+            'data' => $result,
+        ]);
+    }
+
     public function addToCart(Request $request, $produkId)
     {
         $userId = $request->input('user_id'); // Ambil user_id dari request
